@@ -3,10 +3,26 @@ class Solution:
         if target not in nums:
             return [-1,-1]
         
+        i = 0
+        j = len(nums)-1
         a = []
-        for i in range(len(nums)):
-            if nums[i]==target:
-                a.append(i)
+        while i<j:
+            mid = (i+j)//2
+            if nums[mid]>=target:
+                j = mid
+            else:
+                i = mid+1
 
-        return [a[0], a[len(a)-1]]
-                
+        a.append(j)
+        j = len(nums)-1
+        i = 0
+        while i<j:
+            mid = (i+j+1)//2
+            if nums[mid]<=target:
+                i = mid
+            else:
+                j = mid-1
+        a.append(i)
+
+        return a
+        
